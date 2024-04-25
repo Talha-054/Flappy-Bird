@@ -103,7 +103,7 @@ function createObstacle() {
     if (skyWidth < 800){
         for (let i=0 ; i<2 ; i++){
             width = 30;
-            obstacleGap = (skyWidth/2);
+            obstacleGap = (skyWidth/2) + 100;
             obstacleLeft = obstacleGap + i*obstacleGap;
             let newObstacle = new newObs(obstacleLeft,width,i); 
             obstacles.push(newObstacle);
@@ -142,7 +142,7 @@ function moveObstacle() {
             obs.visual.visibility = "hidden";
             score ++;
             timer.innerHTML = score;
-            obstacleLeft = skyWidth;
+            skyWidth<800?   obstacleLeft = (skyWidth + obstacleGap) : obstacleLeft = skyWidth;
             obs.obstacleLeft = obstacleLeft;
             obs.visual.style.left = obstacleLeft + 'px';
             if (obs.obstacleBottom){
@@ -235,6 +235,7 @@ function gameOver (){
     clearInterval(upTimerId);
     clearInterval(doubleJumpId);
     removeEventListener("keyup",jump)
+    document.removeEventListener("click",jump)
 }
 
 
@@ -249,7 +250,7 @@ function collision(){
                 gameOver()
             }
             else if ( (obs.obstacleTop == 0) &&
-            obs.obstacleLeft <= (birdLeft+50) &&
+            obs.obstacleLeft <= (birdLeft+(skyWidth<800? 30:50)) &&
             (obs.obstacleLeft+obs.width) >= birdLeft &&
             birdTop <= (obs.height) && 
             obs.obstacleLeft <= (skyWidth/2 )){
