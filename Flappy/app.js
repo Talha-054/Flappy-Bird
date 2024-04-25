@@ -269,6 +269,22 @@ function collision(){
 
 }
 
+let countdown = function (){
+    countDownId = setInterval(()=>{
+        timer.innerHTML = countDownTimer;
+        countDownTimer -= 1;
+        if (countDownTimer < 0){
+           
+            clearInterval(countDownId);
+            addEventListener("keyup",jump)
+            document.addEventListener("click",jump)
+
+            collisionId = setInterval(collision,1)
+            leftTimerId = setInterval(moveObstacle,30)    
+        }
+    },1000)
+}
+
 
 
 start.addEventListener(("click"),()=>{
@@ -280,20 +296,7 @@ start.addEventListener(("click"),()=>{
     countdown()
 })
 
-let countdown = function (){
-    countDownId = setInterval(()=>{
-        timer.innerHTML = countDownTimer;
-        countDownTimer -= 1;
-        if (countDownTimer < 0){
-           
-            clearInterval(countDownId);
-            addEventListener("keyup",jump)
 
-            collisionId = setInterval(collision,1)
-            leftTimerId = setInterval(moveObstacle,30)    
-        }
-    },1000)
-}
 
 
 
